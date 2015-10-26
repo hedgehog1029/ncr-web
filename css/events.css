@@ -46,10 +46,6 @@
     display: none;
 }
 
-.event p.event-ext-desc.show {
-    display: block;
-}
-
 .event a {
     position: absolute;
     bottom: 10px;

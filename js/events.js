@@ -4,17 +4,18 @@ $(document).on("ready", function() {
     $(".event-btn").click(function() {
         if ($(this).parent().attr("data-open") != 1) {
             $(this).addClass("rotate");
-            $(this).parent().children(".event-ext-desc").addClass("show");
+            $(this).parent().children(".event-ext-desc").slideDown();
             $(this).parent().attr("data-open", 1);
         } else {
             $(this).removeClass("rotate");
-            $(this).parent().children(".event-ext-desc").removeClass("show");
+            $(this).parent().children(".event-ext-desc").slideUp();
             $(this).parent().attr("data-open", 0);
         }
     });
 });
 
-var events = [{"thumb": "img/danika%20image.jpg", "title": "Test Event", "desc": "A test event.", "ext_desc": "<li>Where: VC Dubtrack room</li>"},
+var events = [{"thumb": "img/danika%20image.jpg", "title": "Test Event", "desc": "A test event.",
+"ext_desc": "<li>Where: NCR Dubtrack room</li><li>When: 1st November 2015</li>"},
              {"thumb": "img/danika%20image.jpg", "title": "Test Event 2", "desc": "Another test event.", "ext_desc": "Extended description."}]; // temporary test variable
 
 function populate(parent) {
