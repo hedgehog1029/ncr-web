@@ -17,16 +17,33 @@ $(document).ready(function() {
             playerControl.pause();
         }
     });
+
+    var volState = 2;
     
     $("#mute").on("click", function(e) {
-        if (playerr.muted) {
-            playerr.muted = false;
-            $("#mute").addClass("fa-volume-up");
+        if (volState == 2) {
+            $("#mute").addClass("fa-volume-down");
             $("#mute").removeClass("fa-volume-off");
-        } else {
-            playerr.muted = true;
+            $("#mute").removeClass("fa-volume-up");
+
+            playerr.volume = 0.5;
+            volState = 1;
+        } else if (volState == 1) {
             $("#mute").addClass("fa-volume-off");
             $("#mute").removeClass("fa-volume-up");
+            $("#mute").removeClass("fa-volume-down");
+
+            playerr.volume = 0;
+            volState = 0;
+        } else if (volState == 0) {
+            $("#mute").addClass("fa-volume-up");
+            $("#mute").removeClass("fa-volume-off");
+            $("#mute").removeClass("fa-volume-down");
+
+            playerr.volume = 1;
+            volState = 2;
+        } else {
+            volState = 2;
         }
     });
 
@@ -65,8 +82,16 @@ $(document).ready(function() {
         }, 1000);
     });
 
+    $("#events").click(function() {
+        $("html, body").animate({
+            scrollTop: $(".universe:nth-child(3)").offset().top
+        }, 1100);
+    });
+
     // Back to top
     $(".btt").click(function() {
+        $(".btt").removeClass("shown");
+
         $("html, body").animate({
             scrollTop: 0
         }, 1000);
