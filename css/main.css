@@ -48,6 +48,7 @@ html, body {
     text-align: center;
     color: #fff;
     margin: 0;
+    text-shadow: 7px 7px 4px #111;
 }
 
 .universe:nth-child(2) {
