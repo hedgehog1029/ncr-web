@@ -1,0 +1,301 @@
+@import url("../font/fonts.css");
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Page */
+
+.page {
+    width: 100%;
+    height: 100%;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Multiverse */
+
+.multiverse {
+    width: 100%;
+    height: auto;
+}
+
+.universe {
+    width: 100%;
+    height: 100%;
+}
+
+/* Individual Universe Styles */
+
+.universe:nth-child(1) {
+    background: url(http://i.imgur.com/P8Mx0oD.jpg);
+    background-size: cover;
+}
+
+.universe:nth-child(1) .header {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.universe:nth-child(1) .header h1.title {
+    font-family:"digital desolation", sans-serif;
+    font-size: 60px;
+    letter-spacing:  -1px;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+}
+
+.universe:nth-child(2) {
+    background: #fff;
+    font-family: 'Raleway', sans-serif;
+}
+
+.universe:nth-child(2) .header {
+    position: relative;
+    padding: 5% 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+}
+
+.universe:nth-child(2) .header > * {
+    margin: 0;
+    text-align: center;
+    color: #000;
+}
+
+.universe:nth-child(2) .header hr {
+    border: 0;
+    height: 1px;
+    margin: 3px 0;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.universe:nth-child(2) .header h2.title {
+    font-size: 40px;
+}
+
+.universe:nth-child(2) .header p {
+    font-size: 22px;
+}
+
+/* Second universe social links */
+
+.universe:nth-child(2) .links {
+    position: relative;
+    padding: 5% 0;
+    width: 100%;
+    background: url("../img/starry-bg.jpg");
+    background-size: cover;
+    background-position: 0% 50%;
+}
+
+.universe:nth-child(2) .links .central {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.universe:nth-child(2) .links .central a.btn {
+    margin-right: 10px;
+}
+
+.universe:nth-child(2) .links .central a.btn:last-child {
+    margin-right: 0;
+}
+
+.universe:nth-child(2) .links .central h2 {
+    font-size: 30px;
+    margin: 0 0 40px 0;
+    color: #fff;
+}
+
+.btn {
+    position: relative;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    background: transparent;
+    transition: background .25s;
+}
+
+.btn > * {
+    display: inline;
+    color: #fff;
+    transition: color .25s;
+}
+
+.btn:hover {
+    background: #fff;
+}
+
+.btn:hover > * {
+    color: #000;
+}
+
+/* Second universe team */
+
+.universe:nth-child(2) .team {
+    position: relative;
+    padding: 5% 0;
+    width: 100%;
+    background: #fff;
+}
+
+.universe:nth-child(2) .team .central {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.universe:nth-child(2) .team .central h2 {
+    margin: 0 0 20px 0;
+    font-size: 30px;
+    color: #000;
+}
+
+.universe:nth-child(2) .team .central div.member {
+    display: inline-block;
+    width: 200px;
+    height: auto;
+}
+
+.universe:nth-child(2) .team .central div.member img {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    border: 0;
+}
+
+.universe:nth-child(2) .team .central div.member h5 {
+    margin: 10px 0;
+    font-size: 22px;
+}
+
+.universe:nth-child(2) .team .central div.member p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.nav ul {
+    position: fixed;
+    z-index: 1000;
+    margin: 0;
+    width: 100%;
+    float: left;
+    padding: 0;
+    background-color: #1A1A1A;
+}
+
+.nav li {
+    position: relative;
+    display: inline;
+    float: left;
+    list-style: none;
+}
+.nav li a {
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-family: "Raleway", sans-serif;
+    font-weight: none;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    color: #fff;
+    transition: color .25s, background-color .25s;
+}
+
+.nav li a:hover {
+    color: ghostwhite;
+    background-color: darkgrey;
+}
+
+.nav li.right {
+    position: relative;
+    float: right;
+}
+
+div.cursor {
+    display: block;
+    position: fixed;
+    left: -10px;
+    width: 0;
+    height: 3px;
+    background: #fff;
+    z-index: 1001;
+    transition: width .5s, left .5s;
+}
+
+div.audio-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    background: transparent;
+    position: absolute;
+    z-index: 500;
+    background: rgba(0, 0, 0, 0.6);
+    border-top-right-radius: 10px;
+}
+
+div.audio-controls i {
+    font-size: 1.8em;
+    margin-right: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: color .25s;
+}
+
+div.audio-controls p {
+    display: none;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: #fff;
+}
+
+div.audio-controls p.shown {
+    display: inline;
+}
+
+div.audio-controls i:hover {
+    color: #bbb;
+}
+
+div.btt {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s, bottom .3s;
+}
+
+div.btt i {
+    color: #000;
+    transition: color .3s;
+}
+
+div.btt:hover {
+    bottom: 12px;
+    cursor: pointer;
+}
+
+div.btt:hover i {
+    color: #555;
+}
+
+div.btt.shown {
+    opacity: 1;
+    visibility: visible;
+}
