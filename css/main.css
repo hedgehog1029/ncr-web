@@ -275,6 +275,50 @@ div.vr {
     height: 20px;
 }
 
+body div.user {
+    position: fixed;
+    right: 0;
+    top: -30px;
+    padding: 8px 6px;
+    background: #1A1A1A;
+    z-index: 999;
+    transition: top .25s;
+}
+
+body div.user.show {
+    top: 30px;
+}
+
+body div.user p {
+    display: inline;
+    margin: 0;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+}
+
+body div.user button.submit {
+    width: 32px;
+    height: 32px;
+    background: 0;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: background .25s;
+}
+
+body div.user button.submit i {
+    color: #fff;
+    transition: color .25s;
+}
+
+body div.user button.submit:hover {
+    background: #fff;
+    cursor: pointer;
+}
+
+body div.user button.submit:hover i {
+    color: #000;
+}
+
 div.cursor {
     display: block;
     position: fixed;
@@ -322,6 +366,31 @@ div.audio-controls i:hover {
     color: #bbb;
 }
 
+div.notifier {
+    width: 128px;
+    height: 128px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, .9);
+    position: fixed;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 2000;
+    padding: 0 5px;
+}
+
+div.notifier > * {
+    color: #fff;
+}
+
+div.notifier p {
+    margin: 10px 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+}
+
 div.btt {
     position: fixed;
     bottom: 10px;
@@ -358,4 +427,17 @@ a:focus, *:focus {
 
 a {
     cursor: pointer;
+}
+
+.inactive {
+    display: none;
+}
+
+input.styled-input {
+    border: 0;
+    background: 0;
+    color: #fff;
+    border-bottom: 2px solid #ddd;
+    padding: 8px 4px;
+    margin: 0 8px;
 }

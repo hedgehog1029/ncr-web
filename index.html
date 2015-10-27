@@ -18,11 +18,27 @@
                 <li><div class="vr"></div></li>
                 <li><a>Forum</a></li>
                 <li><a>Gaming</a></li>
-                <li class="right"><a>Register</a></li>
-                <li class="right"><a>Login</a></li>
+                <div class="nouser">
+                    <li class="right"><a id="register">Register</a></li>
+                    <li class="right"><a id="login">Login</a></li>
+                </div>
+                <div class="signedin inactive">
+                    <li class="right"><a id="username"></a></li>
+                    <li class="right"><img id="thumb"></li>
+                </div>
             </ul>
         </div>
         <div class="cursor"></div>
+
+        <div class="notifier">
+        </div>
+
+        <div class="user">
+            <p id="sso-mode"></p>
+            <input class="styled-input" type="text" placeholder="Username">
+            <input class="styled-input" type="password" placeholder="Password">
+            <button class="submit"><i class="fa fa-chevron-right"></i></button>
+        </div>
 
         <div class="page">
             <div class="multiverse">
@@ -39,7 +55,7 @@
                     </div>
                     <div class="links">
                         <div class="central">
-                            <h2>Find us on the web!</h2>
+                            <h2>Check out our music!</h2>
                             <a target="_blank" class="btn btn-yt" href="https://www.youtube.com/user/NightcoreReality">
                                 <i class="fa fa-youtube-play"></i>
                                 <p>YouTube</p>
@@ -80,7 +96,7 @@
                 </div><!-- End second universe -->
                 <div class="universe">
                     <div class="header">
-                        <h2>Events</h2>
+                        <h2>Upcoming Events</h2>
                     </div>
                     <div class="event-container">
                         <div class="event-wrapper" id="events-wrapper">
@@ -91,6 +107,8 @@
             <div class="audio-controls">
                 <i id="play" class="fa fa-play"></i>
                 <i id="mute" class="fa fa-volume-up"></i>
+                <i id="back" class="fa fa-backward"></i>
+                <i id="forward" class="fa fa-forward"></i>
                 <p id="nowplaying" style="display: none;"></p>
             </div>
             <div class="btt">
