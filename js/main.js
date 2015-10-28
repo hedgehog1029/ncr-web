@@ -5,7 +5,7 @@ var tracks = [
 ]; // Array of tracks to randomly select from on page load
 
 var pageData = {
-
+    "store": localStorage
 }; // Global data store
 
 $(document).ready(function() {
@@ -15,6 +15,8 @@ $(document).ready(function() {
 
     playerr.onended = function() {
         playerControl.pause();
+
+        $("#forward").click();
     }
     
     $("#play").on("click", function(e) {
@@ -88,12 +90,19 @@ $(document).ready(function() {
 
         $("#u1").css("background-position", "0% " + hPercent + "%");
         $(".links").css("background-position", "0% " + percent + "%");
+        $(".universe:nth-child(3)").css("background-position", "0% " + percent + "%");
 
         // Back to top button
         if ($(window).scrollTop() >= $(".universe:nth-child(2)").offset().top) {
             $(".btt").addClass("shown");
         } else {
             $(".btt").removeClass("shown");
+        }
+
+        if (($(window).scrollTop() > 950) && ($(window).scrollTop() < 1650)) {
+            $(".btt").addClass("white");
+        } else {
+            $(".btt").removeClass("white");
         }
     });
 
@@ -108,6 +117,12 @@ $(document).ready(function() {
         $("html, body").animate({
             scrollTop: $(".universe:nth-child(3)").offset().top
         }, 1100);
+    });
+
+    $("#artists").click(function() {
+        $("html, body").animate({
+            scrollTop: $(".universe:nth-child(4)").offset().top
+        }, 1200);
     });
 
     // Nav login/register
@@ -138,8 +153,27 @@ $(document).ready(function() {
         }, 1000);
     });
 
+    // Audio autoplay question
+
+    $("#audio-yes").click(function() {
+        $(".audio-question").slideUp();
+
+        pageData.store.setItem("ncr-autoplay", "yes");
+
+        playerControl.play();
+    });
+
+    $("#audio-no").click(function() {
+        $(".audio-question").slideUp();
+
+        pageData.store.setItem("ncr-autoplay", "no");
+    });
+
     // Sekrit volume control keypress
     $(document).keypress(function(e) {
+        if (e.target.nodeName == "INPUT")
+            return;
+
         if (e.which == 105) {
             e.preventDefault();
 
@@ -149,15 +183,23 @@ $(document).ready(function() {
 
             playerControl.vol.down();
         }
-    })
+    });
+
+    $(".loader h3").html("Loading cool things...");
 });
 
 $(window).load(function() {
+    $(".loader").fadeOut(1000);
+
     var track = Math.floor(Math.random() * tracks.length);
 
     pageData.nowplaying = track;
     playerControl.load(track);
-    playerControl.play();
+
+    if (!pageData.store.getItem("ncr-autoplay"))
+        $(".audio-question").slideDown();
+    else if (pageData.store.getItem("ncr-autoplay") == "yes")
+        playerControl.play();
 });
 
 var playerControl = {
@@ -185,13 +227,13 @@ var playerControl = {
         "down": function() {
             var playerr = $("#player").get(0);
 
-            if (playerr.volume == 0) {
+            if (playerr.volume < .1) {
                 return;
             } else {
                 playerr.volume -= .1;
             }
 
-            if (playerr.volume < .6 && playerr.volume > 0) {
+            if (playerr.volume < .6 && playerr.volume >= .1) {
                 $("#mute").addClass("fa-volume-down");
                 $("#mute").removeClass("fa-volume-off");
                 $("#mute").removeClass("fa-volume-up");
@@ -216,6 +258,10 @@ var playerControl = {
                 $("#mute").addClass("fa-volume-up");
                 $("#mute").removeClass("fa-volume-off");
                 $("#mute").removeClass("fa-volume-down");
+            } else if (playerr.volume >= .1) {
+                $("#mute").addClass("fa-volume-down");
+                $("#mute").removeClass("fa-volume-off");
+                $("#mute").removeClass("fa-volume-up");
             }
 
             notifier.notify("volume-up", "4", "Volume now " + Math.floor(playerr.volume * 100) + "%.", "vol_notif", 1500);

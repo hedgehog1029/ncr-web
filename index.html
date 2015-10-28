@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>NightcoreReality</title>
+        <title>VirtualReality</title>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-k2/8zcNbxVIh5mnQ52A0r3a6jAgMGxFJFE2707UxGCk= sha512-ZV9KawG2Legkwp3nAlxLIVFudTauWuBpC10uEafMHYL0Sarrz5A7G79kXh5+5+woxQ5HM559XX2UZjMJ36Wplg==" crossorigin="anonymous">
         <link rel="stylesheet" href="css/main.css">
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -12,9 +12,9 @@
             <ul>
                 <li><a id="about">About Us</a></li>
                 <li><a id="events">Events</a></li>
-                <li><a>Artists</a></li>
-                <li><a>Music</a></li>
-                <li><a>Blog</a></li>
+                <li><a id="artists">Artists</a></li>
+                <li><a id="music">Music</a></li>
+                <li><a id="blog">Blog</a></li>
                 <li><div class="vr"></div></li>
                 <li><a>Forum</a></li>
                 <li><a>Gaming</a></li>
@@ -44,7 +44,7 @@
             <div class="multiverse">
                 <div class="universe" id="u1"><!-- First universe: Header -->
                     <div class="header">
-                        <h1 class="title">Nightcore Reality</h1>
+                        <h1 class="title">Virtual Reality</h1>
                     </div>
                 </div><!-- End of first universe -->
                 <div class="universe"><!-- Second universe: About -->
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                 </div><!-- End second universe -->
-                <div class="universe">
+                <div class="universe"><!-- Third universe: Events -->
                     <div class="header">
                         <h2>Upcoming Events</h2>
                     </div>
@@ -103,6 +103,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="universe">
+                    <div class="header">
+                        <h2>Artists</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="audio-question">
+                <h6>Autoplay music?</h6>
+                <p>We believe autoplaying music adds to the experience of the site,<br>but it isn't for everyone.</p>
+                <p class="last"><small>Your choice will be remembered.</small></p>
+                <a id="audio-yes" class="btn btn-yes"><i class="fa fa-check"></i><p>Yes</p></a>
+                <a id="audio-no" class="btn btn-no"><i class="fa fa-times"></i><p>No</p></a>
             </div>
             <div class="audio-controls">
                 <i id="play" class="fa fa-play"></i>
@@ -113,6 +125,17 @@
             </div>
             <div class="btt">
                 <i class="fa fa-arrow-up"></i>
+            </div>
+
+            <div class="loader">
+                <h4>VR.NET</h4>
+                <div class="mask-loading">
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                    </div>
+                </div>
+                <h3>Initializing the awesome...</h3>
             </div>
         </div>
 

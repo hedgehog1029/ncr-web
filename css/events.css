@@ -11,6 +11,7 @@
     padding: 10px;
     overflow: hidden;
     margin-bottom: 10px;
+    background: #fff;
 }
 
 .event:last-child {
