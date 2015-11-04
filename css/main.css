@@ -205,9 +205,6 @@ html, body {
 }
 
 .universe:nth-child(3) {
-    background: url("../img/starry-bg.jpg");
-    background-size: cover;
-    background-position: 0% 0%;
     height: auto;
 }
 
@@ -226,7 +223,7 @@ html, body {
 }
 
 .universe:nth-child(3) .header h2 {
-    color: #fff;
+    color: #000;
 }
 
 .universe:nth-child(3) .event-container {
@@ -239,6 +236,62 @@ html, body {
     height: 100%;
     margin-left: 50%;
     transform: translateX(-50%);
+}
+
+.universe:nth-child(4) .games {
+    width: 100%;
+    height: auto;
+    padding: 5px 5%;
+    box-sizing: border-box;
+}
+
+.universe:nth-child(4) .games .game {
+    position: relative;
+    width: 20%;
+    margin: 2% 2%;
+    height: 20%;
+    background-size: cover;
+    display: inline-block;
+}
+
+.universe:nth-child(4) .games .game .blur {
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 17, 17, .6);
+    padding: 15% 0;
+    box-sizing: border-box;
+}
+
+.universe:nth-child(4) .games .game .blur > * {
+    position: relative;
+    margin: 0;
+    z-index: 5;
+    text-align: center;
+    color: #fff;
+    opacity: 1;
+    cursor: default;
+}
+
+.universe:nth-child(4) .games .game .blur h3 {
+    font-size: 22px;
+    text-transform: uppercase;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: top .5s;
+}
+
+.universe:nth-child(4) .games .game .blur:hover h3 {
+    top: 10%;
+}
+
+.universe:nth-child(4) .games .game .blur p {
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity .7s;
+}
+
+.universe:nth-child(4) .games .game .blur:hover p {
+    opacity: 1;
 }
 
 .nav ul {

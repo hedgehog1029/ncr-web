@@ -79,30 +79,36 @@ $(document).ready(function() {
         $(".cursor").attr("style", "left: -10px; width: 0;");
     });
 
+    $(".cursor").hover(function() {
+        var width = $(this).width();
+        var loc = $(this).offset().left;
+
+        $(".cursor").attr("style", "left: " + loc + "px; width: " + width + "px;");
+    }, function() {
+        $(".cursor").css("left", "-10px");
+        $(".cursor").css("width", "0");
+    });
+
     $(window).scroll(function() {
+        var scrollTop = $(window).scrollTop();
+
         // Parallax
         var height = $(document).height() - $(window).height();
-        var percent = ($(window).scrollTop() / height) * 100;
+        var percent = (scrollTop / height) * 100;
 
         if (percent > 100) percent = 100;
 
-        var hPercent = ($(window).scrollTop() / $(window).height()) * 100;
+        var hPercent = (scrollTop / $(window).height()) * 100;
 
         $("#u1").css("background-position", "0% " + hPercent + "%");
         $(".links").css("background-position", "0% " + percent + "%");
-        $(".universe:nth-child(3)").css("background-position", "0% " + percent + "%");
+        $(".universe:nth-child(4)").css("background-position", "0% " + percent + "%");
 
         // Back to top button
-        if ($(window).scrollTop() >= $(".universe:nth-child(2)").offset().top) {
+        if (scrollTop >= $(".universe:nth-child(2)").offset().top) {
             $(".btt").addClass("shown");
         } else {
             $(".btt").removeClass("shown");
-        }
-
-        if (($(window).scrollTop() > 950) && ($(window).scrollTop() < 1650)) {
-            $(".btt").addClass("white");
-        } else {
-            $(".btt").removeClass("white");
         }
     });
 
@@ -119,7 +125,7 @@ $(document).ready(function() {
         }, 1100);
     });
 
-    $("#artists").click(function() {
+    $("#gaming").click(function() {
         $("html, body").animate({
             scrollTop: $(".universe:nth-child(4)").offset().top
         }, 1200);
@@ -200,6 +206,10 @@ $(window).load(function() {
         $(".audio-question").slideDown();
     else if (pageData.store.getItem("ncr-autoplay") == "yes")
         playerControl.play();
+
+    $(".game").each(function(i) {
+        $(this).css("background-image", $(this).attr("data-background"));
+    });
 });
 
 var playerControl = {
