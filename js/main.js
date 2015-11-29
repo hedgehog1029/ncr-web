@@ -146,9 +146,23 @@ $(document).ready(function() {
         $("body .user").addClass("show");
     });
 
+    $("#user").click(function() {
+        $("body .user-menu").addClass("show");
+    });
+
+    $("body .user-menu a").click(function() {
+        $("body .user-menu").removeClass("show");
+    });
+
     $(".page").click(function() {
         $("body .user").removeClass("show");
+        $("body .user-menu").removeClass("show");
     });
+
+    // Login / register buttons
+    $(".submit").click(login);
+
+    $("#logout").click(logout);
 
     // Back to top
     $(".btt").click(function() {
@@ -178,7 +192,11 @@ $(document).ready(function() {
     // Sekrit volume control keypress
     $(document).keypress(function(e) {
         if (e.target.nodeName == "INPUT")
-            return;
+            if (e.which == 13) {
+                e.preventDefault();
+
+                login();
+            } else return;
 
         if (e.which == 105) {
             e.preventDefault();
@@ -194,9 +212,97 @@ $(document).ready(function() {
     $(".loader h3").html("Loading cool things...");
 });
 
-$(window).load(function() {
-    $(".loader").fadeOut(1000);
+var BASE_URL = "https://platypus.ag-n.net:443";
 
+function login() {
+    var user = $("#username").val(),
+        password = $("#password").val();
+
+    $(".submit i").attr("class", "fa fa-cog fa-spin");
+
+    var pass = md5(password);
+
+    if (pageData.sso_mode == "login") {
+        var url = BASE_URL + "/login";
+
+        $.get(url, { username: user, password: pass }, function(data) {
+            if (data.success) {
+                pageData.user = data.user;
+
+                $("body .user").removeClass("show");
+                $(".nouser").addClass("inactive");
+                $(".signedin").removeClass("inactive");
+
+                $("#user").html(data.user);
+
+                notifier.notify("sign-in", 4, "Logged in as " + data.user + ".", "login-notif", 2000);
+
+                pageData.store.setItem("session", data.sid);
+            } else {
+                notifier.notify("times", 4, data.info, "login-notif", 2000);
+            }
+
+            $(".submit i").attr("class", "fa fa-chevron-right");
+
+            $("#password").val("");
+        }).fail(function() {
+            notifier.notify("times", 4, "Error signing in. Try again?", "login-notif", 2000);
+
+            $(".submit i").attr("class", "fa fa-chevron-right");
+        });
+    } else if (pageData.sso_mode == "register") {
+        var url = BASE_URL + "/register";
+
+        $.get(url, { username: user, password: pass }, function(data) {
+            if (data.success) {
+                pageData.user = user;
+
+                $("body .user").removeClass("show");
+                $(".nouser").addClass("inactive");
+                $(".signedin").removeClass("inactive");
+
+                $("#user").html(user);
+
+                notifier.notify("sign-in", 4, "Registered " + user + ".", "login-notif", 2000);
+
+                pageData.store.setItem("session", data.sid);
+            } else {
+                notifier.notify("times", 4, data.info, "login-notif", 2000);
+            }
+
+            $(".submit i").attr("class", "fa fa-chevron-right");
+
+            $("#password").val("");
+        }).fail(function() {
+            notifier.notify("times", 4, "Error signing up. Try again?", "login-notif", 2000);
+
+            $(".submit i").attr("class", "fa fa-chevron-right");
+        });
+    }
+}
+
+function logout() {
+    $.get(BASE_URL + "/logout", { sid: pageData.store.session }, function(data) {
+        if (data.success) {
+            pageData.user = null;
+
+            $(".nouser").removeClass("inactive");
+            $(".signedin").addClass("inactive");
+
+            $("#user").html("");
+
+            pageData.store.removeItem("session");
+
+            notifier.notify("sign-out", 4, "Logged out.", "logout-notif", 2000);
+        } else {
+            notifier.notify("times", 4, data.info, "login-notif", 2000);
+        }
+    }).fail(function() {
+        notifier.notify("times", 4, "Error logging out. Try again?", "logout-notif", 2000);
+    });
+}
+
+$(window).load(function() {
     var track = Math.floor(Math.random() * tracks.length);
 
     pageData.nowplaying = track;
@@ -209,7 +315,44 @@ $(window).load(function() {
 
     $(".game").each(function(i) {
         $(this).css("background-image", $(this).attr("data-background"));
+
+        var url = $(this).attr("data-server");
+        var self = $(this);
+
+        if (url != null) {
+            $.get(url, function(data) {
+                self.find(".status").html(data.players + "/" + data.maxplayers + " players");
+            }).fail(function() {
+                self.find(".status").html("Server down :(");
+            });
+        }
     });
+
+    if (pageData.store.getItem("session")) {
+        $(".loader h3").html("Logging you in...");
+
+        $.get(BASE_URL + "/session", { sid: pageData.store.getItem("session") }, function(data) {
+            if (data.success) {
+                $("body .user").removeClass("show");
+                $(".nouser").addClass("inactive");
+                $(".signedin").removeClass("inactive");
+
+                $("#user").html(data.user);
+
+                $(".loader h3").html("Logged in as " + data.user + ".");
+            } else {
+                pageData.store.removeItem("session");
+
+                notifier.notify("times", 4, data.info, "login-notif", 2500);
+            }
+        }).fail(function() {
+            $(".loader h3").html("Login server is offline :(");
+
+            notifier.notify("times", 4, "Login server appears to be offline.", "login-notif", 2500);
+        });
+    }
+
+    $(".loader").fadeOut(1000);
 });
 
 var playerControl = {
@@ -319,7 +462,7 @@ var notifier = {
         notifier.obj.get(0).appendChild(i);
         notifier.obj.get(0).appendChild(t);
 
-        notifier.obj.fadeIn(500);
+        notifier.obj.fadeIn(250);
 
         clearTimeout(notifier.timeout);
 

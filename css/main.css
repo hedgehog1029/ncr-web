@@ -46,7 +46,7 @@ html, body {
 
 .universe:nth-child(1) .header h1.title {
     font-family:"digital desolation", sans-serif;
-    font-size: 60px;
+    font-size: 50px;
     letter-spacing:  -1px;
     text-align: center;
     color: #fff;
@@ -206,6 +206,7 @@ html, body {
 
 .universe:nth-child(3) {
     height: auto;
+    min-height: 20%;
 }
 
 .universe:nth-child(3) .header, .universe:nth-child(4) .header {
@@ -226,15 +227,19 @@ html, body {
     color: #000;
 }
 
+.universe:nth-child(3) .header p {
+    margin: 0;
+    font-size: 16px;
+}
+
 .universe:nth-child(3) .event-container {
     width: 100%;
-    height: 90%;
 }
 
 .universe:nth-child(3) .event-container .event-wrapper {
     width: 50%;
-    height: 100%;
     margin-left: 50%;
+    margin-bottom: 20px;
     transform: translateX(-50%);
 }
 
@@ -250,6 +255,7 @@ html, body {
     width: 20%;
     margin: 2% 2%;
     height: 20%;
+    min-height: 120px;
     background-size: cover;
     display: inline-block;
 }
@@ -259,7 +265,14 @@ html, body {
     height: 100%;
     background: rgba(17, 17, 17, .6);
     padding: 15% 0;
+    opacity: 1;
+    box-shadow: inset 0px 0px 0px 10px rgba(0,0,0,0);
     box-sizing: border-box;
+    transition: box-shadow .4s ease-in-out;
+}
+
+.universe:nth-child(4) .games .game .blur:hover {
+    box-shadow: inset 0px 0px 100px 30px rgba(0,0,0,1);
 }
 
 .universe:nth-child(4) .games .game .blur > * {
@@ -381,6 +394,41 @@ body div.user button.submit:hover {
 
 body div.user button.submit:hover i {
     color: #000;
+}
+
+div.user-menu {
+    position: fixed;
+    right: 0;
+    top: -50px;
+    background: #1A1A1A;
+    z-index: 998;
+    transition: top .25s;
+    width: 250px;
+    font-family: 'Raleway', sans-serif;
+    border-top: 2px solid #ddd;
+}
+
+div.user-menu.show {
+    top: 35px;
+}
+
+div.user-menu p {
+    margin: 5px 0;
+    text-transform: uppercase;
+    color: #555;
+}
+
+div.user-menu a {
+    margin: 0;
+    padding: 5px 25%;
+    text-align: center;
+    color: #eee;
+    transition: background-color .25s;
+    display: block;
+}
+
+div.user-menu a:hover {
+    background-color: darkgrey;
 }
 
 div.cursor {
@@ -530,6 +578,10 @@ a {
     display: none;
 }
 
+.centre {
+    text-align: center;
+}
+
 input.styled-input {
     border: 0;
     background: 0;
@@ -552,7 +604,7 @@ input.styled-input {
 }
 
 .loader h3 {
-    position: fixed;
+    position: absolute;
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
@@ -563,7 +615,7 @@ input.styled-input {
 }
 
 .loader h4 {
-    position: fixed;
+    position: relative;
     top: 5%;
     left: 50%;
     transform: translateX(-50%);
@@ -574,14 +626,17 @@ input.styled-input {
 }
 
 .mask-loading {
-    position: fixed;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     widows: 100%;
     background-color: rgba(0, 0, 0, .75);
 }
+
 .spinner {
   width: 50px;
   height: 50px;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
